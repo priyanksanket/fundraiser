@@ -5,7 +5,7 @@ To implement this platform, I am utilizing various tools and technologies. I use
 
 For interacting with the blockchain, I rely on Web3.js, a JavaScript library that provides the necessary functions and interfaces. It enables me to connect to the blockchain network, send transactions, and retrieve data from smart contracts.
 
-I have chosen Python as the programming language for developing the backend logic of my crowdfunding platform. Python allows me to write the necessary scripts and handle the business logic associated with crowdfunding campaigns, user authentication, and fund management.
+I have chosen Java as the programming language for developing the backend logic of my crowdfunding platform. Java allows me to write the necessary scripts and handle the business logic associated with crowdfunding campaigns, user authentication, and fund management.
 
 The core of my project lies in smart contracts, written in Solidity. Smart contracts are self-executing contracts deployed on the blockchain, defining the rules and conditions of the crowdfunding process. They automatically execute predefined actions, such as transferring funds when certain conditions are met.
 
