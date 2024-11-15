@@ -2,9 +2,6 @@ import datetime
 from flask import Flask, render_template,request,session,redirect
 from DBConnection import Db
 from web3 import HTTPProvider,Web3
-
-
-
 app = Flask(__name__)
 app.secret_key="987654"
 
@@ -12,10 +9,6 @@ compiled_contract_path=r"C:\smartcontracts\build\contracts\Crowdfunding.json"
 deployed_contract_address="0x46e89b2d1EE12882502255d18cFb32Bc11142DfF"
 import json
 web3 = Web3(HTTPProvider("HTTP://127.0.0.1:7545"))
-
-# @app.route('/ab')
-# def hello_world():
-#     return 'Hello World!'
 
 
 @app.route('/')
@@ -1355,12 +1348,6 @@ def org_donationrefundpost():
     else:
         pass
     return redirect('/view_mycharity')
-
-
-
-
-
-
 
 
 if __name__ == '__main__':
