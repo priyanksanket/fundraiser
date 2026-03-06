@@ -1,0 +1,88 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id                String  @id @default(uuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId], map: "Account_userId_fkey")
+}
+
+model Session {
+  id           String   @id @default(uuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId], map: "Session_userId_fkey")
+}
+
+model User {
+  id            String     @id @default(uuid())
+  name          String?
+  email         String?    @unique
+  emailVerified DateTime?
+  image         String?
+  created_at    DateTime   @default(now())
+  accounts      Account[]
+  campaigns     Campaign[]
+  donations     Donation[]
+  sessions      Session[]
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Campaign {
+  id            String     @id @default(uuid())
+  title         String
+  description   String     @db.Text
+  target_amount Float
+  raised_amount Float      @default(0)
+  image_url     String?
+  category      String?
+  status        String     @default("Active")
+  created_at    DateTime   @default(now())
+  userId        String
+  user          User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  donations     Donation[]
+
+  @@index([userId], map: "Campaign_userId_fkey")
+}
+
+model Donation {
+  id         String   @id @default(uuid())
+  amount     Float
+  created_at DateTime @default(now())
+  userId     String
+  campaignId String
+  campaign   Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([campaignId], map: "Donation_campaignId_fkey")
+  @@index([userId], map: "Donation_userId_fkey")
+}
