@@ -44,7 +44,7 @@ export default function CampaignActions({ campaignId, campaignTitle, isCompleted
 
                 <button
                     onClick={handleShare}
-                    className="w-full bg-white hover:bg-gray-50 text-gray-900 border border-gray-200 py-4 rounded-xl text-lg font-bold transition-all shadow-sm flex items-center justify-center gap-2"
+                    className="w-full bg-white/40 hover:bg-white/60 text-gray-900 border border-white/60 py-4 rounded-xl text-lg font-bold transition-all shadow-[0_4px_16px_rgba(0,0,0,0.05)] backdrop-blur-md flex items-center justify-center gap-2"
                 >
                     {copied ? (
                         <><Check size={20} className="text-green-500" /><span className="text-green-600">Link Copied!</span></>
@@ -55,7 +55,7 @@ export default function CampaignActions({ campaignId, campaignTitle, isCompleted
             </div>
 
             {/* Trust Indicator */}
-            <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
+            <div className="bg-white/40 backdrop-blur-xl rounded-2xl p-6 border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.05)]">
                 <div className="flex items-start gap-4">
                     <div className="bg-green-50 p-2 rounded-full text-green-600 mt-1">
                         <ShieldCheck size={24} />

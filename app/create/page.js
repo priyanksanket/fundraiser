@@ -96,10 +96,13 @@ export default function CreateCampaign() {
     const charLeft = 2000 - formData.description.length;
 
     return (
-        <div className="min-h-screen bg-gray-50 font-sans">
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 flex flex-col font-sans relative">
+            <div className="fixed top-[-10%] left-[-10%] w-[50%] h-[50%] bg-purple-300 rounded-full mix-blend-multiply filter blur-[150px] opacity-40 pointer-events-none z-0"></div>
+            <div className="fixed top-[20%] right-[-10%] w-[40%] h-[50%] bg-yellow-200 rounded-full mix-blend-multiply filter blur-[150px] opacity-40 pointer-events-none z-0"></div>
+            <div className="fixed bottom-[-10%] left-[20%] w-[50%] h-[50%] bg-pink-300 rounded-full mix-blend-multiply filter blur-[150px] opacity-40 pointer-events-none z-0"></div>
 
             {/* ── Top bar ──────────────────────────────────────── */}
-            <div className="bg-white border-b border-gray-100 py-4 sticky top-0 z-40">
+            <div className="bg-white/40 backdrop-blur-xl border-b border-white/50 shadow-[0_4px_30px_rgba(0,0,0,0.05)] py-4 sticky top-0 z-40">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
                     <Link href="/" className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors group">
                         <ArrowLeft size={15} className="transform group-hover:-translate-x-1 transition-transform" />
@@ -112,7 +115,7 @@ export default function CreateCampaign() {
                 </div>
             </div>
 
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 relative z-10">
                 <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
 
                     {/* ── Form (3/5) ───────────────────────────── */}
@@ -136,7 +139,7 @@ export default function CreateCampaign() {
                         <form onSubmit={handleSubmit} className="space-y-6">
 
                             {/* Title */}
-                            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-2">
+                            <div className="bg-white/40 backdrop-blur-xl rounded-2xl border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.05)] p-6 space-y-2">
                                 <label htmlFor="title" className="flex items-center gap-2 text-sm font-bold text-gray-900">
                                     <FileText size={15} className="text-gray-400" /> Campaign Title <span className="text-red-400">*</span>
                                 </label>
@@ -145,7 +148,7 @@ export default function CreateCampaign() {
                                     value={formData.title} onChange={handleChange}
                                     maxLength={120}
                                     placeholder="e.g. Help build a community library in rural India"
-                                    className="block w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-gray-900 placeholder-gray-400 focus:border-primary-500 focus:bg-white focus:ring-2 focus:ring-primary-300 transition-all outline-none text-sm"
+                                    className="block w-full rounded-xl border border-white/60 bg-white/50 backdrop-blur-md px-4 py-3 text-gray-900 placeholder-gray-400 focus:border-primary-500 focus:bg-white/70 focus:ring-2 focus:ring-primary-300 transition-all outline-none text-sm shadow-inner"
                                 />
                                 <p className="text-xs text-gray-400">{formData.title.length}/120 characters</p>
                             </div>
@@ -153,14 +156,14 @@ export default function CreateCampaign() {
                             {/* Category + Goal side-by-side */}
                             <div className="grid grid-cols-2 gap-4">
                                 {/* Category */}
-                                <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-2">
+                                <div className="bg-white/40 backdrop-blur-xl rounded-2xl border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.05)] p-6 space-y-2">
                                     <label htmlFor="category" className="flex items-center gap-2 text-sm font-bold text-gray-900">
                                         <Tag size={15} className="text-gray-400" /> Category
                                     </label>
                                     <select
                                         id="category" name="category"
                                         value={formData.category} onChange={handleChange}
-                                        className="block w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-gray-900 focus:border-primary-500 focus:bg-white focus:ring-2 focus:ring-primary-300 transition-all outline-none text-sm"
+                                        className="block w-full rounded-xl border border-white/60 bg-white/50 backdrop-blur-md px-4 py-3 text-gray-900 focus:border-primary-500 focus:bg-white/70 focus:ring-2 focus:ring-primary-300 transition-all outline-none text-sm shadow-inner"
                                     >
                                         <option value="">Select a category</option>
                                         {CATEGORIES.map((c) => (
@@ -170,7 +173,7 @@ export default function CreateCampaign() {
                                 </div>
 
                                 {/* Goal Amount */}
-                                <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-2">
+                                <div className="bg-white/40 backdrop-blur-xl rounded-2xl border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.05)] p-6 space-y-2">
                                     <label htmlFor="target_amount" className="flex items-center gap-2 text-sm font-bold text-gray-900">
                                         <DollarSign size={15} className="text-gray-400" /> Goal Amount <span className="text-red-400">*</span>
                                     </label>
@@ -181,14 +184,14 @@ export default function CreateCampaign() {
                                             required min="1" step="1"
                                             value={formData.target_amount} onChange={handleChange}
                                             placeholder="10,000"
-                                            className="block w-full rounded-xl border border-gray-200 bg-gray-50 pl-7 pr-4 py-3 text-gray-900 placeholder-gray-400 focus:border-primary-500 focus:bg-white focus:ring-2 focus:ring-primary-300 transition-all outline-none text-sm"
+                                            className="block w-full rounded-xl border border-white/60 bg-white/50 backdrop-blur-md pl-7 pr-4 py-3 text-gray-900 placeholder-gray-400 focus:border-primary-500 focus:bg-white/70 focus:ring-2 focus:ring-primary-300 transition-all outline-none text-sm shadow-inner"
                                         />
                                     </div>
                                 </div>
                             </div>
 
                             {/* Description */}
-                            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-2">
+                            <div className="bg-white/40 backdrop-blur-xl rounded-2xl border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.05)] p-6 space-y-2">
                                 <label htmlFor="description" className="flex items-center gap-2 text-sm font-bold text-gray-900">
                                     <FileText size={15} className="text-gray-400" /> Campaign Story <span className="text-red-400">*</span>
                                 </label>
@@ -198,13 +201,13 @@ export default function CreateCampaign() {
                                     required rows={7} maxLength={2000}
                                     value={formData.description} onChange={handleChange}
                                     placeholder="Hi, I'm raising funds because..."
-                                    className="block w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-gray-900 placeholder-gray-400 focus:border-primary-500 focus:bg-white focus:ring-2 focus:ring-primary-300 transition-all outline-none text-sm resize-y"
+                                    className="block w-full rounded-xl border border-white/60 bg-white/50 backdrop-blur-md px-4 py-3 text-gray-900 placeholder-gray-400 focus:border-primary-500 focus:bg-white/70 focus:ring-2 focus:ring-primary-300 transition-all outline-none text-sm resize-y shadow-inner"
                                 />
                                 <p className={`text-xs ${charLeft < 100 ? "text-red-400" : "text-gray-400"}`}>{charLeft} characters remaining</p>
                             </div>
 
                             {/* Image URL */}
-                            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-2">
+                            <div className="bg-white/40 backdrop-blur-xl rounded-2xl border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.05)] p-6 space-y-2">
                                 <label htmlFor="image_url" className="flex items-center gap-2 text-sm font-bold text-gray-900">
                                     <LinkIcon size={15} className="text-gray-400" /> Campaign Image URL
                                     <span className="text-xs font-normal text-gray-400">(optional)</span>
@@ -214,7 +217,7 @@ export default function CreateCampaign() {
                                     id="image_url" name="image_url" type="url"
                                     value={formData.image_url} onChange={handleChange}
                                     placeholder="https://images.unsplash.com/..."
-                                    className="block w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-gray-900 placeholder-gray-400 focus:border-primary-500 focus:bg-white focus:ring-2 focus:ring-primary-300 transition-all outline-none text-sm font-mono text-xs"
+                                    className="block w-full rounded-xl border border-white/60 bg-white/50 backdrop-blur-md px-4 py-3 text-gray-900 placeholder-gray-400 focus:border-primary-500 focus:bg-white/70 focus:ring-2 focus:ring-primary-300 transition-all outline-none text-sm font-mono text-xs shadow-inner"
                                 />
                             </div>
 
@@ -240,9 +243,9 @@ export default function CreateCampaign() {
                     {/* ── Live Preview (2/5) ───────────────────── */}
                     <div className="lg:col-span-2 lg:sticky lg:top-24">
                         <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Live Preview</p>
-                        <div className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
+                        <div className="bg-white/40 backdrop-blur-xl rounded-3xl border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.05)] overflow-hidden">
                             {/* Image */}
-                            <div className="h-44 bg-gray-100 flex items-center justify-center overflow-hidden">
+                            <div className="h-44 bg-black/5 border-b border-white/30 flex items-center justify-center overflow-hidden">
                                 {preview && isValidUrl(preview) ? (
                                     <img src={preview} alt="Preview" className="w-full h-full object-cover" onError={() => setPreview("")} />
                                 ) : (
@@ -267,10 +270,10 @@ export default function CreateCampaign() {
                                     <span>$0 raised</span>
                                     <span>of {formData.target_amount ? `$${Number(formData.target_amount).toLocaleString()}` : "$0"}</span>
                                 </div>
-                                <div className="w-full bg-gray-100 rounded-full h-1.5 mb-4">
+                                <div className="w-full bg-black/5 rounded-full h-1.5 mb-4">
                                     <div className="bg-primary-500 h-1.5 rounded-full" style={{ width: "0%" }} />
                                 </div>
-                                <div className="w-full bg-gray-100 text-gray-400 text-xs font-semibold text-center py-2.5 rounded-xl">
+                                <div className="w-full bg-black/5 text-gray-400 text-xs font-semibold text-center py-2.5 rounded-xl border border-white/40 shadow-inner">
                                     Donate Now
                                 </div>
                             </div>

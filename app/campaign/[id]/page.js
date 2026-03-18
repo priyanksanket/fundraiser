@@ -50,7 +50,10 @@ export default async function CampaignPage({ params }) {
     );
 
     return (
-        <div className="min-h-screen bg-gray-50 font-sans">
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 flex flex-col font-sans relative overflow-hidden">
+            <div className="fixed top-[-10%] left-[-10%] w-[50%] h-[50%] bg-purple-300 rounded-full mix-blend-multiply filter blur-[150px] opacity-40 pointer-events-none z-0"></div>
+            <div className="fixed top-[20%] right-[-10%] w-[40%] h-[50%] bg-yellow-200 rounded-full mix-blend-multiply filter blur-[150px] opacity-40 pointer-events-none z-0"></div>
+            <div className="fixed bottom-[-10%] left-[20%] w-[50%] h-[50%] bg-pink-300 rounded-full mix-blend-multiply filter blur-[150px] opacity-40 pointer-events-none z-0"></div>
 
             {/* Payment result toast */}
             <Suspense fallback={null}>
@@ -58,8 +61,8 @@ export default async function CampaignPage({ params }) {
             </Suspense>
 
             {/* ── Top bar ──────────────────────────────────────── */}
-            <div className="bg-white border-b border-gray-100 sticky top-0 z-40 py-4">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="bg-white/40 backdrop-blur-xl border-b border-white/50 shadow-[0_4px_30px_rgba(0,0,0,0.05)] sticky top-0 z-40 py-4">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                     <Link href="/" className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors group">
                         <ArrowLeft size={15} className="transform group-hover:-translate-x-1 transition-transform" />
                         Back to Campaigns
@@ -67,14 +70,14 @@ export default async function CampaignPage({ params }) {
                 </div>
             </div>
 
-            <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 relative z-10">
                 <div className="flex flex-col lg:flex-row gap-10">
 
                     {/* ── LEFT: Main content ─────────────────────── */}
                     <div className="flex-1 min-w-0">
 
                         {/* Hero image */}
-                        <div className="relative w-full h-72 sm:h-96 rounded-3xl overflow-hidden bg-gray-100 mb-8 shadow-sm">
+                        <div className="relative w-full h-72 sm:h-96 rounded-3xl overflow-hidden bg-black/5 border border-white/30 backdrop-blur-md mb-8 shadow-sm">
                             {campaign.image_url ? (
                                 <img
                                     src={campaign.image_url}
@@ -89,7 +92,7 @@ export default async function CampaignPage({ params }) {
                         </div>
 
                         {/* Campaign meta */}
-                        <div className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100 mb-6">
+                        <div className="bg-white/40 backdrop-blur-xl rounded-3xl p-8 border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.05)] mb-6">
 
                             {/* Stats row */}
                             <div className="flex items-center gap-4 text-sm text-gray-400 mb-5 flex-wrap">
@@ -134,7 +137,7 @@ export default async function CampaignPage({ params }) {
                         </div>
 
                         {/* Recent donors — mobile only (duplicated from sidebar below lg) */}
-                        <div className="block lg:hidden bg-white rounded-3xl p-8 shadow-sm border border-gray-100">
+                        <div className="block lg:hidden bg-white/40 backdrop-blur-xl rounded-3xl p-8 border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.05)]">
                             <DonorList donations={campaign.donations} />
                         </div>
                     </div>
@@ -144,7 +147,7 @@ export default async function CampaignPage({ params }) {
                         <div className="sticky top-24 space-y-6">
 
                             {/* Fundraising summary */}
-                            <div className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100">
+                            <div className="bg-white/40 backdrop-blur-xl rounded-3xl p-8 border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.05)]">
                                 {/* Amounts */}
                                 <div className="mb-2">
                                     <span className="text-3xl font-extrabold text-gray-900">{fmt(campaign.raised_amount)}</span>
@@ -152,7 +155,7 @@ export default async function CampaignPage({ params }) {
                                 </div>
 
                                 {/* Progress bar */}
-                                <div className="w-full bg-gray-100 rounded-full h-3 overflow-hidden mb-5">
+                                <div className="w-full bg-black/5 rounded-full h-3 overflow-hidden mb-5">
                                     <div
                                         className="bg-primary-500 h-3 rounded-full relative overflow-hidden"
                                         style={{ width: `${pct}%` }}
@@ -186,7 +189,7 @@ export default async function CampaignPage({ params }) {
                             </div>
 
                             {/* Recent donors — desktop */}
-                            <div className="hidden lg:block bg-white rounded-3xl p-8 shadow-sm border border-gray-100">
+                            <div className="hidden lg:block bg-white/40 backdrop-blur-xl rounded-3xl p-8 border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.05)]">
                                 <DonorList donations={campaign.donations} />
                             </div>
                         </div>

@@ -31,8 +31,8 @@ function CampaignCard({ campaign, onView }) {
     const fmt = (n) => new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(n);
 
     return (
-        <div className="group bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col">
-            <div className="relative h-48 overflow-hidden bg-gray-100">
+        <div className="group bg-white/40 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.05)] hover:shadow-[0_12px_48px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 flex flex-col">
+            <div className="relative h-48 overflow-hidden bg-black/5 border-b border-white/30">
                 {campaign.image_url ? (
                     <img src={campaign.image_url} alt={campaign.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                 ) : (
@@ -50,7 +50,7 @@ function CampaignCard({ campaign, onView }) {
                         <span className="text-primary-600">{fmt(campaign.raised_amount)} raised</span>
                         <span className="text-gray-400">of {fmt(campaign.target_amount)}</span>
                     </div>
-                    <div className="w-full bg-gray-100 rounded-full h-2 overflow-hidden mb-4">
+                    <div className="w-full bg-black/5 rounded-full h-2 overflow-hidden mb-4">
                         <div className="bg-primary-500 h-2 rounded-full transition-all duration-1000" style={{ width: `${pct}%` }} />
                     </div>
                     <div className="flex items-center justify-between text-sm text-gray-500 mb-5">
@@ -137,10 +137,13 @@ function HomeInner() {
 
 
     return (
-        <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 flex flex-col font-sans relative">
+            <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-purple-300 rounded-full mix-blend-multiply filter blur-[150px] opacity-40 pointer-events-none"></div>
+            <div className="absolute top-[20%] right-[-10%] w-[40%] h-[50%] bg-yellow-200 rounded-full mix-blend-multiply filter blur-[150px] opacity-40 pointer-events-none"></div>
+            <div className="absolute bottom-[-10%] left-[20%] w-[50%] h-[50%] bg-pink-300 rounded-full mix-blend-multiply filter blur-[150px] opacity-40 pointer-events-none"></div>
 
             {/* ── Navbar ─────────────────────────────────────────── */}
-            <nav className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${isScrolled ? "bg-white/80 backdrop-blur-md shadow-sm border-b border-gray-100 py-3" : "bg-transparent py-5"}`}>
+            <nav className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${isScrolled ? "bg-white/40 backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.05)] border-b border-white/50 py-3" : "bg-transparent py-5"}`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center">
                         <div className="flex items-center gap-2 cursor-pointer group" onClick={() => router.push("/")}>
@@ -221,14 +224,14 @@ function HomeInner() {
                     <button onClick={() => session ? router.push("/create") : signIn("google")} className="flex items-center justify-center gap-2 bg-primary-500 hover:bg-primary-600 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all hover:-translate-y-1 shadow-lg">
                         Start a Campaign <ArrowRight size={20} />
                     </button>
-                    <a href="#campaigns" className="flex items-center justify-center gap-2 bg-white hover:bg-gray-50 text-gray-900 border border-gray-200 px-8 py-4 rounded-full text-lg font-semibold transition-all shadow-sm hover:shadow">
+                    <a href="#campaigns" className="flex items-center justify-center gap-2 bg-white/40 backdrop-blur-md hover:bg-white/60 text-gray-900 border border-white/60 px-8 py-4 rounded-full text-lg font-semibold transition-all shadow-[0_4px_20px_rgba(0,0,0,0.05)]">
                         Explore Causes
                     </a>
                 </div>
             </section>
 
             {/* ── Campaigns Grid ──────────────────────────────────── */}
-            <section id="campaigns" className="py-16 bg-white">
+            <section id="campaigns" className="py-16 relative z-10">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
                     {/* ── Controls ───────────────────────────────── */}
@@ -251,7 +254,7 @@ function HomeInner() {
                                     value={searchInput}
                                     onChange={(e) => setSearchInput(e.target.value)}
                                     placeholder="Search campaigns…"
-                                    className="pl-9 pr-8 py-2.5 text-sm border border-gray-200 rounded-full bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-400 transition-all w-56"
+                                    className="pl-9 pr-8 py-2.5 text-sm border border-white/60 rounded-full bg-white/40 backdrop-blur-md shadow-[0_4px_16px_rgba(0,0,0,0.03)] focus:outline-none focus:ring-2 focus:ring-primary-300 focus:bg-white/60 transition-all w-56"
                                 />
                                 {searchInput && (
                                     <button onClick={() => setSearchInput("")} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
@@ -265,7 +268,7 @@ function HomeInner() {
                                 <select
                                     value={activeSort}
                                     onChange={(e) => setParam("sort", e.target.value)}
-                                    className="appearance-none pl-4 pr-8 py-2.5 text-sm font-semibold border border-gray-200 rounded-full bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-300 cursor-pointer"
+                                    className="appearance-none pl-4 pr-8 py-2.5 text-sm font-semibold border border-white/60 rounded-full bg-white/40 backdrop-blur-md shadow-[0_4px_16px_rgba(0,0,0,0.03)] focus:outline-none focus:ring-2 focus:ring-primary-300 cursor-pointer focus:bg-white/60 transition-all"
                                 >
                                     {SORT_OPTIONS.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
                                 </select>
@@ -281,8 +284,8 @@ function HomeInner() {
                                     key={cat}
                                     onClick={() => setParam("category", cat)}
                                     className={`px-4 py-2 rounded-full text-sm font-semibold border transition-all ${activeCategory === cat
-                                        ? "bg-gray-900 text-white border-gray-900 shadow-sm"
-                                        : "bg-white text-gray-600 border-gray-200 hover:border-gray-400 hover:text-gray-900"
+                                        ? "bg-gray-900/90 text-white border-gray-900/10 shadow-[0_4px_16px_rgba(0,0,0,0.1)] backdrop-blur-md"
+                                        : "bg-white/40 text-gray-700 border-white/60 hover:bg-white/60 hover:border-white shadow-[0_4px_16px_rgba(0,0,0,0.02)] backdrop-blur-md"
                                         }`}
                                 >
                                     {cat === "all" ? "All" : CATEGORIES[cat]?.label}
@@ -295,8 +298,8 @@ function HomeInner() {
                     {loading ? (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                             {[...Array(6)].map((_, i) => (
-                                <div key={i} className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden animate-pulse">
-                                    <div className="h-48 bg-gray-100" />
+                                <div key={i} className="bg-white/40 backdrop-blur-xl rounded-3xl border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.05)] overflow-hidden animate-pulse">
+                                    <div className="h-48 bg-white/30" />
                                     <div className="p-6 space-y-3">
                                         <div className="h-3 bg-gray-100 rounded w-1/3" />
                                         <div className="h-5 bg-gray-100 rounded w-3/4" />
@@ -323,7 +326,7 @@ function HomeInner() {
             </section>
 
             {/* ── Footer ──────────────────────────────────────────── */}
-            <footer className="mt-auto py-10 border-t border-gray-100 bg-gray-50">
+            <footer className="mt-auto py-10 border-t border-white/40 bg-white/30 backdrop-blur-lg relative z-20">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
                     <div className="flex items-center gap-2 text-gray-700 font-bold">
                         <div className="bg-primary-500 text-white p-1.5 rounded-lg"><Heart size={16} /></div>

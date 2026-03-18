@@ -68,7 +68,7 @@ function TerminateButton({ campaignId, status }) {
 export default function CampaignList({ campaigns }) {
     if (campaigns.length === 0) {
         return (
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-10 text-center">
+            <div className="bg-white/40 backdrop-blur-xl rounded-2xl border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.05)] p-10 text-center">
                 <p className="text-gray-500 font-medium">No campaigns yet.</p>
                 <Link href="/create" className="mt-4 inline-block text-sm font-semibold text-primary-600 hover:underline">
                     Start your first campaign →
@@ -78,10 +78,10 @@ export default function CampaignList({ campaigns }) {
     }
 
     return (
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+        <div className="bg-white/40 backdrop-blur-xl rounded-2xl border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.05)] overflow-hidden">
             <table className="w-full text-sm">
                 <thead>
-                    <tr className="border-b border-gray-100 bg-gray-50/60">
+                    <tr className="border-b border-white/30 bg-black/5">
                         <th className="px-5 py-3.5 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Campaign</th>
                         <th className="px-4 py-3.5 text-right text-xs font-semibold text-gray-500 uppercase tracking-wider hidden sm:table-cell">Raised</th>
                         <th className="px-4 py-3.5 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider">Status</th>
@@ -89,20 +89,20 @@ export default function CampaignList({ campaigns }) {
                         <th className="px-4 py-3.5 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider">Actions</th>
                     </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-50">
+                <tbody className="divide-y divide-white/20">
                     {campaigns.map((c) => {
                         const displayStatus = getDisplayStatus(c);
                         const config = STATUS_CONFIG[displayStatus];
                         const pct = Math.min((c.raised_amount / c.target_amount) * 100, 100);
 
                         return (
-                            <tr key={c.id} className={`transition-colors ${config.row} hover:bg-gray-50/70`}>
+                            <tr key={c.id} className={`transition-colors ${config.row} hover:bg-white/30`}>
                                 {/* Title + progress */}
                                 <td className="px-5 py-4">
                                     <p className={`font-semibold leading-snug line-clamp-1 ${displayStatus === "terminated" ? "line-through text-gray-400" : "text-gray-800"}`}>
                                         {c.title}
                                     </p>
-                                    <div className="mt-1.5 w-full bg-gray-100 rounded-full h-1.5 overflow-hidden">
+                                    <div className="mt-1.5 w-full bg-black/5 rounded-full h-1.5 overflow-hidden">
                                         <div
                                             className={`h-1.5 rounded-full ${displayStatus === "completed" ? "bg-green-400" : displayStatus === "terminated" ? "bg-gray-300" : "bg-primary-500"}`}
                                             style={{ width: `${pct}%` }}
