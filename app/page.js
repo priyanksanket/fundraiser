@@ -31,7 +31,7 @@ function CampaignCard({ campaign, onView }) {
     const fmt = (n) => new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(n);
 
     return (
-        <div className="group bg-white/40 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.05)] hover:shadow-[0_12px_48px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 flex flex-col">
+        <div className="group bg-blue-50/20 backdrop-blur-2xl rounded-3xl overflow-hidden border border-white/40 shadow-[0_8px_32px_rgba(31,38,135,0.07)] hover:shadow-[0_12px_48px_rgba(31,38,135,0.1)] transition-all duration-500 hover:-translate-y-2 flex flex-col">
             <div className="relative h-48 overflow-hidden bg-black/5 border-b border-white/30">
                 {campaign.image_url ? (
                     <img src={campaign.image_url} alt={campaign.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
@@ -137,13 +137,14 @@ function HomeInner() {
 
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 flex flex-col font-sans relative">
-            <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-purple-300 rounded-full mix-blend-multiply filter blur-[150px] opacity-40 pointer-events-none"></div>
-            <div className="absolute top-[20%] right-[-10%] w-[40%] h-[50%] bg-yellow-200 rounded-full mix-blend-multiply filter blur-[150px] opacity-40 pointer-events-none"></div>
-            <div className="absolute bottom-[-10%] left-[20%] w-[50%] h-[50%] bg-pink-300 rounded-full mix-blend-multiply filter blur-[150px] opacity-40 pointer-events-none"></div>
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-cyan-50 flex flex-col font-sans relative overflow-hidden">
+            <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-blue-400 rounded-full mix-blend-multiply filter blur-[120px] opacity-20 animate-pulse pointer-events-none"></div>
+            <div className="absolute top-[10%] right-[-5%] w-[50%] h-[50%] bg-indigo-300 rounded-full mix-blend-multiply filter blur-[120px] opacity-20 pointer-events-none"></div>
+            <div className="absolute bottom-[-10%] left-[10%] w-[60%] h-[60%] bg-cyan-400 rounded-full mix-blend-multiply filter blur-[120px] opacity-20 animate-pulse pointer-events-none"></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.4),transparent)] pointer-events-none"></div>
 
             {/* ── Navbar ─────────────────────────────────────────── */}
-            <nav className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${isScrolled ? "bg-white/40 backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.05)] border-b border-white/50 py-3" : "bg-transparent py-5"}`}>
+            <nav className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${isScrolled ? "bg-white/20 backdrop-blur-2xl shadow-[0_8px_32px_rgba(31,38,135,0.07)] border-b border-white/30 py-3" : "bg-transparent py-5"}`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center">
                         <div className="flex items-center gap-2 cursor-pointer group" onClick={() => router.push("/")}>
@@ -224,7 +225,7 @@ function HomeInner() {
                     <button onClick={() => session ? router.push("/create") : signIn("google")} className="flex items-center justify-center gap-2 bg-primary-500 hover:bg-primary-600 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all hover:-translate-y-1 shadow-lg">
                         Start a Campaign <ArrowRight size={20} />
                     </button>
-                    <a href="#campaigns" className="flex items-center justify-center gap-2 bg-white/40 backdrop-blur-md hover:bg-white/60 text-gray-900 border border-white/60 px-8 py-4 rounded-full text-lg font-semibold transition-all shadow-[0_4px_20px_rgba(0,0,0,0.05)]">
+                    <a href="#campaigns" className="flex items-center justify-center gap-2 bg-blue-50/20 backdrop-blur-2xl hover:bg-white/40 text-blue-900 border border-white/40 px-8 py-4 rounded-full text-lg font-semibold transition-all shadow-[0_8px_32px_rgba(31,38,135,0.07)]">
                         Explore Causes
                     </a>
                 </div>
@@ -254,7 +255,7 @@ function HomeInner() {
                                     value={searchInput}
                                     onChange={(e) => setSearchInput(e.target.value)}
                                     placeholder="Search campaigns…"
-                                    className="pl-9 pr-8 py-2.5 text-sm border border-white/60 rounded-full bg-white/40 backdrop-blur-md shadow-[0_4px_16px_rgba(0,0,0,0.03)] focus:outline-none focus:ring-2 focus:ring-primary-300 focus:bg-white/60 transition-all w-56"
+                                    className="pl-9 pr-8 py-2.5 text-sm border border-white/40 rounded-full bg-blue-50/20 backdrop-blur-2xl shadow-[0_8px_32px_rgba(31,38,135,0.05)] focus:outline-none focus:ring-2 focus:ring-primary-300 focus:bg-white/40 transition-all w-56 placeholder:text-blue-400/60"
                                 />
                                 {searchInput && (
                                     <button onClick={() => setSearchInput("")} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
@@ -268,7 +269,7 @@ function HomeInner() {
                                 <select
                                     value={activeSort}
                                     onChange={(e) => setParam("sort", e.target.value)}
-                                    className="appearance-none pl-4 pr-8 py-2.5 text-sm font-semibold border border-white/60 rounded-full bg-white/40 backdrop-blur-md shadow-[0_4px_16px_rgba(0,0,0,0.03)] focus:outline-none focus:ring-2 focus:ring-primary-300 cursor-pointer focus:bg-white/60 transition-all"
+                                    className="appearance-none pl-4 pr-8 py-2.5 text-sm font-semibold border border-white/40 rounded-full bg-blue-50/20 backdrop-blur-2xl shadow-[0_8px_32px_rgba(31,38,135,0.05)] focus:outline-none focus:ring-2 focus:ring-primary-300 cursor-pointer focus:bg-white/40 transition-all text-blue-900"
                                 >
                                     {SORT_OPTIONS.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
                                 </select>
@@ -285,7 +286,7 @@ function HomeInner() {
                                     onClick={() => setParam("category", cat)}
                                     className={`px-4 py-2 rounded-full text-sm font-semibold border transition-all ${activeCategory === cat
                                         ? "bg-gray-900/90 text-white border-gray-900/10 shadow-[0_4px_16px_rgba(0,0,0,0.1)] backdrop-blur-md"
-                                        : "bg-white/40 text-gray-700 border-white/60 hover:bg-white/60 hover:border-white shadow-[0_4px_16px_rgba(0,0,0,0.02)] backdrop-blur-md"
+                                        : "bg-blue-50/20 text-blue-800 border-white/40 hover:bg-white/40 hover:border-white shadow-[0_8px_32px_rgba(31,38,135,0.03)] backdrop-blur-2xl"
                                         }`}
                                 >
                                     {cat === "all" ? "All" : CATEGORIES[cat]?.label}
