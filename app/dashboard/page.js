@@ -70,7 +70,7 @@ export default async function DashboardPage() {
                 </div>
 
                 {/* ── Stats row ───────────────────────────────────── */}
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
                     {[
                         { icon: Heart, label: "Campaigns Started", value: campaigns.length, color: "bg-pink-50   text-pink-600" },
                         { icon: TrendingUp, label: "Total Raised", value: fmt(totalRaised), color: "bg-green-50  text-green-600" },
@@ -89,10 +89,10 @@ export default async function DashboardPage() {
                     ))}
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
 
                     {/* ── My Campaigns (3/5) ───────────────────────── */}
-                    <section className="lg:col-span-3">
+                    <section className="md:col-span-3">
                         <div className="flex items-center justify-between mb-4">
                             <h2 className="text-xl font-bold text-gray-900">My Campaigns</h2>
                             <Link href="/create" className="text-sm font-semibold text-primary-600 hover:text-primary-700 flex items-center gap-1">
@@ -104,7 +104,7 @@ export default async function DashboardPage() {
                     </section>
 
                     {/* ── Donation History (2/5) ───────────────────── */}
-                    <section className="lg:col-span-2">
+                    <section className="md:col-span-2">
                         <h2 className="text-xl font-bold text-gray-900 mb-4">Donation History</h2>
 
                         {donations.length === 0 ? (
