@@ -39,13 +39,14 @@ export default async function DashboardPage() {
     const totalDonated = donations.reduce((sum, d) => sum + d.amount, 0);
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 flex flex-col font-sans relative overflow-hidden">
-            <div className="fixed top-[-10%] left-[-10%] w-[50%] h-[50%] bg-purple-300 rounded-full mix-blend-multiply filter blur-[150px] opacity-40 pointer-events-none z-0"></div>
-            <div className="fixed top-[20%] right-[-10%] w-[40%] h-[50%] bg-yellow-200 rounded-full mix-blend-multiply filter blur-[150px] opacity-40 pointer-events-none z-0"></div>
-            <div className="fixed bottom-[-10%] left-[20%] w-[50%] h-[50%] bg-pink-300 rounded-full mix-blend-multiply filter blur-[150px] opacity-40 pointer-events-none z-0"></div>
+        <div className="min-h-screen bg-[#f8fafc] flex flex-col font-sans relative overflow-hidden">
+            {/* Animated Background Blobs */}
+            <div className="fixed top-[-10%] left-[-10%] w-[60%] h-[60%] bg-gradient-to-br from-indigo-400 via-purple-400 to-pink-400 rounded-full mix-blend-multiply filter blur-[160px] opacity-30 animate-pulse pointer-events-none z-0"></div>
+            <div className="fixed top-[20%] right-[-10%] w-[50%] h-[50%] bg-gradient-to-bl from-teal-300 via-emerald-300 to-cyan-300 rounded-full mix-blend-multiply filter blur-[160px] opacity-30 animate-pulse pointer-events-none z-0" style={{ animationDelay: "2s" }}></div>
+            <div className="fixed bottom-[-10%] left-[20%] w-[60%] h-[60%] bg-gradient-to-tr from-rose-300 via-orange-300 to-amber-300 rounded-full mix-blend-multiply filter blur-[160px] opacity-30 animate-pulse pointer-events-none z-0" style={{ animationDelay: "4s" }}></div>
 
             {/* ── Top bar ───────────────────────────────────────── */}
-            <div className="bg-white/40 backdrop-blur-xl border-b border-white/50 shadow-[0_4px_30px_rgba(0,0,0,0.05)] py-4 sticky top-0 z-40">
+            <div className="bg-white/60 backdrop-blur-2xl border-b border-white shadow-[0_4px_30px_rgba(0,0,0,0.03)] py-4 sticky top-0 z-40 transition-all">
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between relative z-10">
                     <Link href="/" className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors group">
                         <ArrowLeft size={15} className="transform group-hover:-translate-x-1 transition-transform" />
@@ -64,10 +65,10 @@ export default async function DashboardPage() {
             <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 relative z-10">
 
                 {/* ── Header ──────────────────────────────────────── */}
-                <div className="mb-8">
-                    <h1 className="text-3xl font-extrabold text-gray-900 mb-1">My Dashboard</h1>
-                    <p className="text-gray-500 text-sm">Everything about your fundraising activity in one place.</p>
-                </div>
+            <div className="mb-10 text-center lg:text-left">
+                <h1 className="text-4xl lg:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 via-gray-800 to-gray-600 mb-2 tracking-tight">My Dashboard</h1>
+                <p className="text-gray-500 text-base font-medium">Everything about your fundraising activity in one place.</p>
+            </div>
 
                 {/* ── Stats row ───────────────────────────────────── */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
@@ -77,13 +78,14 @@ export default async function DashboardPage() {
                         { icon: Users, label: "Total Donors", value: campaigns.reduce((s, c) => s + c._count.donations, 0), color: "bg-blue-50 text-blue-600" },
                         { icon: DollarSign, label: "Total Donated", value: fmt(totalDonated), color: "bg-purple-50 text-purple-600" },
                     ].map(({ icon: Icon, label, value, color }) => (
-                        <div key={label} className="bg-white/40 backdrop-blur-xl rounded-2xl border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.05)] p-5 flex flex-col gap-3">
-                            <div className={`w-9 h-9 rounded-xl flex items-center justify-center ${color}`}>
-                                <Icon size={18} />
+                        <div key={label} className="bg-white/60 backdrop-blur-xl rounded-3xl border border-white shadow-sm hover:shadow-[0_16px_40px_rgba(0,0,0,0.05)] p-6 flex flex-col gap-4 transform transition-all duration-300 hover:-translate-y-1.5 group relative overflow-hidden">
+                            <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-white to-transparent opacity-50 rounded-bl-full pointer-events-none"></div>
+                            <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${color} transition-transform duration-300 group-hover:scale-110 shadow-inner`}>
+                                <Icon size={22} className="opacity-90" />
                             </div>
                             <div>
-                                <p className="text-2xl font-extrabold text-gray-900">{value}</p>
-                                <p className="text-xs text-gray-500 mt-0.5">{label}</p>
+                                <p className="text-3xl font-extrabold text-gray-900 tracking-tight">{value}</p>
+                                <p className="text-sm font-semibold text-gray-500 mt-1">{label}</p>
                             </div>
                         </div>
                     ))}
@@ -92,10 +94,10 @@ export default async function DashboardPage() {
                 <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
 
                     {/* ── My Campaigns (3/5) ───────────────────────── */}
-                    <section className="md:col-span-3">
-                        <div className="flex items-center justify-between mb-4">
-                            <h2 className="text-xl font-bold text-gray-900">My Campaigns</h2>
-                            <Link href="/create" className="text-sm font-semibold text-primary-600 hover:text-primary-700 flex items-center gap-1">
+                    <section className="lg:col-span-3">
+                        <div className="flex items-center justify-between mb-6">
+                            <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight">My Campaigns</h2>
+                            <Link href="/create" className="text-sm font-bold text-white bg-gray-900 hover:bg-primary-600 transition-colors px-4 py-2.5 rounded-full shadow-md hover:shadow-lg flex items-center gap-1.5 transform hover:-translate-y-0.5">
                                 + New Campaign
                             </Link>
                         </div>
@@ -104,23 +106,23 @@ export default async function DashboardPage() {
                     </section>
 
                     {/* ── Donation History (2/5) ───────────────────── */}
-                    <section className="md:col-span-2">
-                        <h2 className="text-xl font-bold text-gray-900 mb-4">Donation History</h2>
+                    <section className="lg:col-span-2">
+                        <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight mb-6">Donation History</h2>
 
                         {donations.length === 0 ? (
-                            <div className="bg-white/40 backdrop-blur-xl rounded-2xl border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.05)] p-10 text-center">
-                                <DollarSign className="w-12 h-12 text-gray-200 mx-auto mb-3" />
-                                <p className="text-gray-500 font-medium">No donations yet.</p>
-                                <Link href="/#campaigns" className="mt-4 inline-block text-sm font-semibold text-primary-600 hover:underline">Explore causes →</Link>
+                            <div className="bg-white/60 backdrop-blur-xl rounded-3xl border border-white shadow-sm p-10 text-center hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] transition-all">
+                                <DollarSign className="w-16 h-16 text-gray-200 mx-auto mb-4 drop-shadow-sm" />
+                                <p className="text-gray-500 font-medium text-lg">No donations yet.</p>
+                                <Link href="/#campaigns" className="mt-4 inline-block text-sm font-bold text-primary-600 hover:text-primary-500 hover:underline transition-colors">Explore causes &rarr;</Link>
                             </div>
                         ) : (
-                            <div className="bg-white/40 backdrop-blur-xl rounded-2xl border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.05)] overflow-hidden">
+                            <div className="bg-white/60 backdrop-blur-xl rounded-3xl border border-white shadow-sm overflow-hidden flex flex-col h-[calc(100%-4rem)]">
                                 <ul className="divide-y divide-white/20">
                                     {donations.map((d) => (
-                                        <li key={d.id} className="px-5 py-4 flex items-center gap-4 hover:bg-white/30 transition-colors">
+                                        <li key={d.id} className="px-5 py-4 flex items-center gap-4 hover:bg-white border-b border-gray-50/50 last:border-0 transition-all duration-200 group">
                                             {/* Amount bubble */}
-                                            <div className="w-10 h-10 rounded-xl bg-green-50 border border-green-100 flex items-center justify-center shrink-0">
-                                                <span className="text-xs font-extrabold text-green-600">{fmt(d.amount).replace("$", "")}</span>
+                                            <div className="w-12 h-12 rounded-2xl bg-green-50 border border-green-100 flex items-center justify-center shrink-0 group-hover:bg-green-100 transition-colors shadow-inner">
+                                                <span className="text-sm font-extrabold text-green-600">{fmt(d.amount).replace("$", "")}</span>
                                             </div>
                                             {/* Campaign */}
                                             <div className="flex-1 min-w-0">
@@ -136,9 +138,9 @@ export default async function DashboardPage() {
                                 </ul>
 
                                 {/* Total */}
-                                <div className="px-5 py-3 bg-black/5 backdrop-blur-md border-t border-white/30 flex justify-between items-center">
-                                    <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Total Donated</span>
-                                    <span className="font-extrabold text-gray-800">{fmt(totalDonated)}</span>
+                                <div className="mt-auto px-6 py-4 bg-gray-50/80 backdrop-blur-md border-t border-white flex justify-between items-center shadow-inner">
+                                    <span className="text-xs font-bold text-gray-500 uppercase tracking-widest">Total Donated</span>
+                                    <span className="font-black text-lg text-gray-900">{fmt(totalDonated)}</span>
                                 </div>
                             </div>
                         )}
