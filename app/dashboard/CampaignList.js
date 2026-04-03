@@ -3,7 +3,7 @@
 import { useState, useTransition } from "react";
 import { terminateCampaign } from "@/app/actions/campaigns";
 import Link from "next/link";
-import { ExternalLink, Trash2, Loader2 } from "lucide-react";
+import { ExternalLink, Trash2, Loader2, Edit } from "lucide-react";
 
 const fmt = (n) =>
     new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(n);
@@ -139,6 +139,16 @@ export default function CampaignList({ campaigns }) {
                                         >
                                             <ExternalLink size={13} />
                                         </Link>
+                                        {displayStatus !== "terminated" && (
+                                            <Link
+                                                href={`/campaign/${c.id}/edit`}
+                                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-blue-500 border border-blue-200 hover:bg-blue-50 transition-all"
+                                                title="Edit campaign"
+                                            >
+                                                <Edit size={12} />
+                                                Edit
+                                            </Link>
+                                        )}
                                         <TerminateButton campaignId={c.id} status={displayStatus} />
                                     </div>
                                 </td>
