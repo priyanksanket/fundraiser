@@ -78,75 +78,66 @@ export default function CampaignList({ campaigns }) {
     }
 
     return (
-        <div className="bg-white/40 backdrop-blur-xl rounded-2xl border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.05)] overflow-hidden">
-            <table className="w-full text-sm">
-                <thead>
-                    <tr className="border-b border-white/30 bg-black/5">
-                        <th className="px-5 py-3.5 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Campaign</th>
-                        <th className="px-4 py-3.5 text-right text-xs font-semibold text-gray-500 uppercase tracking-wider hidden sm:table-cell">Raised</th>
-                        <th className="px-4 py-3.5 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider">Status</th>
-                        <th className="px-4 py-3.5 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider hidden md:table-cell">Donors</th>
-                        <th className="px-4 py-3.5 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider">Actions</th>
-                    </tr>
-                </thead>
-                <tbody className="divide-y divide-white/20">
-                    {campaigns.map((c) => {
-                        const displayStatus = getDisplayStatus(c);
-                        const config = STATUS_CONFIG[displayStatus];
-                        const pct = Math.min((c.raised_amount / c.target_amount) * 100, 100);
+        <div className="flex flex-col gap-4">
+            {campaigns.map((c) => {
+                const displayStatus = getDisplayStatus(c);
+                const config = STATUS_CONFIG[displayStatus];
+                const pct = Math.min((c.raised_amount / c.target_amount) * 100, 100);
 
-                        return (
-                            <tr key={c.id} className={`transition-colors ${config.row} hover:bg-white/30`}>
-                                {/* Title + progress */}
-                                <td className="px-5 py-4">
-                                    <p className={`font-semibold leading-snug line-clamp-1 ${displayStatus === "terminated" ? "line-through text-gray-400" : "text-gray-800"}`}>
-                                        {c.title}
-                                    </p>
-                                    <div className="mt-1.5 w-full bg-black/5 rounded-full h-1.5 overflow-hidden">
-                                        <div
-                                            className={`h-1.5 rounded-full ${displayStatus === "completed" ? "bg-green-400" : displayStatus === "terminated" ? "bg-gray-300" : "bg-primary-500"}`}
-                                            style={{ width: `${pct}%` }}
-                                        />
-                                    </div>
-                                    <p className="text-xs text-gray-400 mt-0.5">{fmtDate(c.created_at)}</p>
-                                </td>
+                return (
+                    <div
+                        key={c.id}
+                        className={`bg-white/40 backdrop-blur-xl rounded-2xl border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.05)] p-5 transition-all hover:shadow-[0_12px_48px_rgba(0,0,0,0.08)] flex flex-col gap-4 relative group ${displayStatus === "terminated" ? "opacity-75" : ""}`}
+                    >
+                        <div className="flex items-start justify-between gap-4">
+                            <div className="flex-1 min-w-0">
+                                <Link
+                                    href={`/campaign/${c.id}`}
+                                    className={`text-lg font-bold tracking-tight hover:text-primary-600 transition-colors block truncate ${displayStatus === "terminated" ? "line-through text-gray-400" : "text-gray-900"}`}
+                                >
+                                    {c.title}
+                                </Link>
+                                <p className="text-xs text-gray-400 mt-1 flex items-center gap-2">
+                                    Started {fmtDate(c.created_at)}
+                                    <span className="w-1 h-1 rounded-full bg-gray-300" />
+                                    {c._count.donations} donors
+                                </p>
+                            </div>
+                            <span className={`shrink-0 inline-flex items-center px-3 py-1 rounded-full text-xs font-bold border shadow-sm ${config.badge}`}>
+                                {config.label}
+                            </span>
+                        </div>
 
-                                {/* Raised / Goal */}
-                                <td className="px-4 py-4 text-right hidden sm:table-cell">
-                                    <span className="font-bold text-gray-800">{fmt(c.raised_amount)}</span>
-                                    <p className="text-xs text-gray-400">of {fmt(c.target_amount)}</p>
-                                </td>
+                        <div className="space-y-2">
+                            <div className="flex items-end justify-between">
+                                <div className="flex flex-col">
+                                    <span className="text-2xl font-black text-gray-900 leading-tight">{fmt(c.raised_amount)}</span>
+                                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Raised of {fmt(c.target_amount)}</span>
+                                </div>
+                                <span className="text-sm font-black text-primary-600 bg-primary-50 px-2 py-0.5 rounded-md">{Math.round(pct)}%</span>
+                            </div>
+                            <div className="w-full bg-black/5 rounded-full h-2.5 overflow-hidden border border-white/20">
+                                <div
+                                    className={`h-full rounded-full transition-all duration-1000 ease-out ${displayStatus === "completed" ? "bg-green-400" : displayStatus === "terminated" ? "bg-gray-300" : "bg-gradient-to-r from-primary-500 to-indigo-500"}`}
+                                    style={{ width: `${pct}%` }}
+                                />
+                            </div>
+                        </div>
 
-                                {/* Status badge */}
-                                <td className="px-4 py-4 text-center">
-                                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold border ${config.badge}`}>
-                                        {config.label}
-                                    </span>
-                                </td>
-
-                                {/* Donor count */}
-                                <td className="px-4 py-4 text-center hidden md:table-cell">
-                                    <span className="font-semibold text-gray-700">{c._count.donations}</span>
-                                </td>
-
-                                {/* Actions */}
-                                <td className="px-4 py-4">
-                                    <div className="flex items-center justify-center gap-2">
-                                        <Link
-                                            href={`/campaign/${c.id}`}
-                                            className="inline-flex items-center gap-1 text-xs font-semibold text-gray-400 hover:text-primary-600 transition-colors p-1.5 rounded-lg hover:bg-gray-100"
-                                            title="View campaign"
-                                        >
-                                            <ExternalLink size={13} />
-                                        </Link>
-                                        <TerminateButton campaignId={c.id} status={displayStatus} />
-                                    </div>
-                                </td>
-                            </tr>
-                        );
-                    })}
-                </tbody>
-            </table>
+                        <div className="flex items-center justify-end gap-3 pt-2 border-t border-white/30">
+                            <Link
+                                href={`/campaign/${c.id}`}
+                                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-bold text-gray-500 hover:text-gray-900 hover:bg-white/60 transition-all border border-transparent hover:border-white/50"
+                            >
+                                <ExternalLink size={14} />
+                                View Details
+                            </Link>
+                            <TerminateButton campaignId={c.id} status={displayStatus} />
+                        </div>
+                    </div>
+                );
+            })}
         </div>
     );
 }
+
