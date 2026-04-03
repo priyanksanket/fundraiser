@@ -33,3 +33,39 @@ export async function terminateCampaign(campaignId) {
 
     revalidatePath("/dashboard");
 }
+
+/**
+ * Edit a campaign.
+ * Only the campaign's owner may edit it.
+ */
+export async function updateCampaign(campaignId, data) {
+    const session = await getServerSession(authOptions);
+
+    if (!session?.user?.id) {
+        throw new Error("Unauthorized");
+    }
+
+    // Verify ownership before mutating
+    const campaign = await db.campaign.findUnique({
+        where: { id: campaignId },
+        select: { userId: true, status: true },
+    });
+
+    if (!campaign) throw new Error("Campaign not found");
+    if (campaign.userId !== session.user.id) throw new Error("Forbidden");
+    if (campaign.status === "Terminated") throw new Error("Cannot edit a terminated campaign");
+
+    await db.campaign.update({
+        where: { id: campaignId },
+        data: {
+            title: data.title,
+            description: data.description,
+            target_amount: data.target_amount ? parseInt(data.target_amount, 10) : undefined,
+            category: data.category,
+            image_url: data.image_url,
+        },
+    });
+
+    revalidatePath(`/campaign/${campaignId}`);
+    revalidatePath("/dashboard");
+}

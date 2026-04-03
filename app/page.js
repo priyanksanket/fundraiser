@@ -124,6 +124,7 @@ function HomeInner() {
 
     // Filter + sort
     let displayed = campaigns
+        .filter((c) => c.status !== "Terminated")
         .filter((c) => activeCategory === "all" || getCategory(c.title) === activeCategory)
         .filter((c) => !activeQuery || c.title.toLowerCase().includes(activeQuery.toLowerCase()));
 
