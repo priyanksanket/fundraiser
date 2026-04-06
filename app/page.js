@@ -2,6 +2,7 @@
 
 import { useState, useEffect, Suspense, useCallback } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 import { Heart, Menu, X, ArrowRight, Users, Target, Search, ChevronDown } from 'lucide-react';
 import { useSession, signIn, signOut } from "next-auth/react";
 
@@ -333,6 +334,11 @@ function HomeInner() {
                     <div className="flex items-center gap-2 text-gray-700 font-bold text-lg">
                         <div className="bg-primary-500 text-white p-1.5 rounded-lg"><Heart size={16} /></div>
                         Fundraiser
+                    </div>
+                    <div className="flex items-center gap-4 text-sm font-medium text-gray-500">
+                        <Link href="/privacy" className="hover:text-primary-600 transition-colors">Privacy Policy</Link>
+                        <span>&middot;</span>
+                        <Link href="/terms" className="hover:text-primary-600 transition-colors">Terms of Service</Link>
                     </div>
                     <p className="text-sm text-gray-400">&copy; {new Date().getFullYear()} Fundraiser. All rights reserved.</p>
                 </div>
