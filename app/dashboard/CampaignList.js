@@ -69,12 +69,12 @@ export default function CampaignList({ campaigns }) {
     if (campaigns.length === 0) {
         return (
             <div className="bg-white/60 backdrop-blur-xl rounded-3xl border border-white shadow-sm p-12 text-center hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] transition-all">
-                <div className="w-16 h-16 bg-gradient-to-br from-primary-100 to-primary-50 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-inner">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-blue-50 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-inner">
                     <span className="text-3xl">🚀</span>
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">No campaigns yet</h3>
                 <p className="text-gray-500 font-medium max-w-sm mx-auto">You haven't started any fund-raising campaigns. Create your first one to get started.</p>
-                <Link href="/create" className="mt-6 inline-flex items-center gap-2 bg-gray-900 text-white px-6 py-3 rounded-full text-sm font-bold hover:bg-primary-600 transition-all hover:shadow-lg hover:-translate-y-0.5">
+                <Link href="/create" className="mt-6 inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-full text-sm font-bold hover:bg-blue-700 transition-all hover:shadow-lg hover:-translate-y-0.5">
                     Start your first campaign &rarr;
                 </Link>
             </div>

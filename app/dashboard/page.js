@@ -41,9 +41,9 @@ export default async function DashboardPage() {
     return (
         <div className="min-h-screen bg-[#f8fafc] flex flex-col font-sans relative overflow-hidden">
             {/* Animated Background Blobs */}
-            <div className="fixed top-[-10%] left-[-10%] w-[60%] h-[60%] bg-gradient-to-br from-indigo-400 via-purple-400 to-pink-400 rounded-full mix-blend-multiply filter blur-[160px] opacity-30 animate-pulse pointer-events-none z-0"></div>
-            <div className="fixed top-[20%] right-[-10%] w-[50%] h-[50%] bg-gradient-to-bl from-teal-300 via-emerald-300 to-cyan-300 rounded-full mix-blend-multiply filter blur-[160px] opacity-30 animate-pulse pointer-events-none z-0" style={{ animationDelay: "2s" }}></div>
-            <div className="fixed bottom-[-10%] left-[20%] w-[60%] h-[60%] bg-gradient-to-tr from-rose-300 via-orange-300 to-amber-300 rounded-full mix-blend-multiply filter blur-[160px] opacity-30 animate-pulse pointer-events-none z-0" style={{ animationDelay: "4s" }}></div>
+            <div className="fixed top-[-10%] left-[-10%] w-[60%] h-[60%] bg-gradient-to-br from-blue-400 via-indigo-400 to-cyan-400 rounded-full mix-blend-multiply filter blur-[160px] opacity-40 animate-pulse pointer-events-none z-0"></div>
+            <div className="fixed top-[20%] right-[-10%] w-[50%] h-[50%] bg-gradient-to-bl from-sky-300 via-blue-300 to-indigo-300 rounded-full mix-blend-multiply filter blur-[160px] opacity-40 animate-pulse pointer-events-none z-0" style={{ animationDelay: "2s" }}></div>
+            <div className="fixed bottom-[-10%] left-[20%] w-[60%] h-[60%] bg-gradient-to-tr from-cyan-300 via-sky-300 to-blue-300 rounded-full mix-blend-multiply filter blur-[160px] opacity-40 animate-pulse pointer-events-none z-0" style={{ animationDelay: "4s" }}></div>
 
             {/* ── Top bar ───────────────────────────────────────── */}
             <div className="bg-white/60 backdrop-blur-2xl border-b border-white shadow-[0_4px_30px_rgba(0,0,0,0.03)] py-4 sticky top-0 z-40 transition-all">
@@ -66,17 +66,17 @@ export default async function DashboardPage() {
 
                 {/* ── Header ──────────────────────────────────────── */}
             <div className="mb-10 text-center lg:text-left">
-                <h1 className="text-4xl lg:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 via-gray-800 to-gray-600 mb-2 tracking-tight">My Dashboard</h1>
+                <h1 className="text-4xl lg:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-900 via-blue-800 to-blue-600 mb-2 tracking-tight">My Dashboard</h1>
                 <p className="text-gray-500 text-base font-medium">Everything about your fundraising activity in one place.</p>
             </div>
 
                 {/* ── Stats row ───────────────────────────────────── */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
                     {[
-                        { icon: Heart, label: "Campaigns Started", value: campaigns.length, color: "bg-pink-50   text-pink-600" },
-                        { icon: TrendingUp, label: "Total Raised", value: fmt(totalRaised), color: "bg-green-50  text-green-600" },
-                        { icon: Users, label: "Total Donors", value: campaigns.reduce((s, c) => s + c._count.donations, 0), color: "bg-blue-50 text-blue-600" },
-                        { icon: DollarSign, label: "Total Donated", value: fmt(totalDonated), color: "bg-purple-50 text-purple-600" },
+                        { icon: Heart, label: "Campaigns Started", value: campaigns.length, color: "bg-blue-50 text-blue-600" },
+                        { icon: TrendingUp, label: "Total Raised", value: fmt(totalRaised), color: "bg-sky-50 text-sky-600" },
+                        { icon: Users, label: "Total Donors", value: campaigns.reduce((s, c) => s + c._count.donations, 0), color: "bg-indigo-50 text-indigo-600" },
+                        { icon: DollarSign, label: "Total Donated", value: fmt(totalDonated), color: "bg-cyan-50 text-cyan-600" },
                     ].map(({ icon: Icon, label, value, color }) => (
                         <div key={label} className="bg-white/60 backdrop-blur-xl rounded-3xl border border-white shadow-sm hover:shadow-[0_16px_40px_rgba(0,0,0,0.05)] p-6 flex flex-col gap-4 transform transition-all duration-300 hover:-translate-y-1.5 group relative overflow-hidden">
                             <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-white to-transparent opacity-50 rounded-bl-full pointer-events-none"></div>
@@ -97,7 +97,7 @@ export default async function DashboardPage() {
                     <section className="xl:col-span-8 2xl:col-span-9">
                         <div className="flex items-center justify-between mb-6">
                             <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight">My Campaigns</h2>
-                            <Link href="/create" className="text-sm font-bold text-white bg-gray-900 hover:bg-primary-600 transition-colors px-4 py-2.5 rounded-full shadow-md hover:shadow-lg flex items-center gap-1.5 transform hover:-translate-y-0.5">
+                            <Link href="/create" className="text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 transition-colors px-4 py-2.5 rounded-full shadow-md hover:shadow-lg flex items-center gap-1.5 transform hover:-translate-y-0.5">
                                 + New Campaign
                             </Link>
                         </div>
