@@ -150,7 +150,7 @@ function HomeInner() {
                     <div className="flex justify-between items-center">
                         <div className="flex items-center gap-2 cursor-pointer group" onClick={() => router.push("/")}>
                             <div className="bg-primary-500 text-white p-2 rounded-xl group-hover:bg-primary-600 transition-colors"><Heart size={22} /></div>
-                            <span className="text-xl font-bold tracking-tight text-gray-900">Fundraiser</span>
+                            <span className="text-2xl font-bold tracking-tight text-gray-900">Fundraiser</span>
                         </div>
 
                         <div className="hidden md:flex items-center gap-6">
@@ -330,7 +330,7 @@ function HomeInner() {
             {/* ── Footer ──────────────────────────────────────────── */}
             <footer className="mt-auto py-10 border-t border-white/40 bg-white/30 backdrop-blur-lg relative z-20">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-                    <div className="flex items-center gap-2 text-gray-700 font-bold">
+                    <div className="flex items-center gap-2 text-gray-700 font-bold text-lg">
                         <div className="bg-primary-500 text-white p-1.5 rounded-lg"><Heart size={16} /></div>
                         Fundraiser
                     </div>
